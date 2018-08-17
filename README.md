@@ -48,7 +48,7 @@ and visit [http://localhost:8888/](http://localhost:8888/)
 ### The Code
 
 #### Geojson files
-Each file contain a single FeatureCollection, i.e. groups of related features combined together.
+Each file contains a single FeatureCollection, i.e. groups of related features combined together.
 
 The alignment's file contains a collection of LineString representing the tunnel track.
 ```
@@ -96,3 +96,42 @@ First of all load the ```css``` and ```js``` required for using Leaflet and JQue
 ```
 
 
+Put an element inside the html body as map's placeholder
+
+```
+    <div id="mapid" style="width: 1920px; height: 1080px;"></div>
+```
+
+Inside the ```<script>``` tag, instantiate the Leaflet Map and define a Mapbox tileLayer (remember to use your token)
+
+```
+        var mymap = L.map('mapid').setView( getMyCenter(), 16);
+
+        // Mapbox (mapbox.dark, other options are: mapbox.light, mapbox.satellite  ) tileLayer with accessToken ( you must request an access token )
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.dark',
+            accessToken: '<PUT YOUR MAPBOX TOKEN HERE>'
+        }).addTo(mymap);
+```
+
+For each geojson file you can load the data inside the map and process (```onEachFeature```) each related feature, for example binding a popup with the feature's properties. In this example ```getServiceData``` is a simple wrapper for JQuery's ```$.getJSON```.
+
+```
+      getServiceData("alignments",function(data) {
+            // Adding the alignments (LineString) geojson
+            L.geoJSON(data, {
+                style: function (feature) {
+                    return { color: "#c1272d", opacity: 1, weight: 0.8 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties && feature.properties.code) {
+                        // TODO edit here for an improved popup
+                        var popupContent = "<p>"+feature.properties.code+"</p>";
+                        layer.bindPopup(popupContent);
+                    }
+                }
+            }).addTo(mymap);
+        });
+```
