@@ -22,4 +22,25 @@ For example:
         }).addTo(mymap);
 ```
 
-### Using GeoJSON with Leaflet
+### The code
+
+The code is plain HTML and Javascript, you can see the result here [index.html](https://danzi-tn.github.io/geojson_contourplot/)
+
+Clone this repository
+
+```
+git clone https://github.com/danzi-tn/geojson_contourplot.git
+```
+
+If you have python installed on your linux box you can run the page on a local webserver (in run_python_http.sh you can change port 8888 as you prefer), othewise you have to upload the content of geojson_contourplot to your public_html Apache/Nginx directory
+
+```
+cd geojson_contourplot
+./run_python_http.sh
+```
+
+and visit [http://localhost:8888/](http://localhost:8888/)
+
+
+
+
