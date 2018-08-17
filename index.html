@@ -40,7 +40,7 @@
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
             maxZoom: 18,
             id: 'mapbox.dark',
-            accessToken: '<PUT YOUR MAPBOX TOKEN HERE>'
+            accessToken: 'pk.eyJ1IjoiYW5kcmVhZGFuemkiLCJhIjoiY2pkeDR0Y3dyM200cTJxcDI0b3BlNWt5cyJ9.NIYUOLivTrva9pTEYczKcA'
         }).addTo(mymap);
 
         // Load alignments' GeoJSON data
@@ -49,6 +49,13 @@
             L.geoJSON(data, {
                 style: function (feature) {
                     return { color: "#c1272d", opacity: 1, weight: 0.8 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties && feature.properties.code) {
+                        // TODO edit here for an improved popup
+                        var popupContent = "<p>"+feature.properties.code+"</p>";
+                        layer.bindPopup(popupContent);
+                    }
                 }
             }).addTo(mymap);
         });
@@ -69,6 +76,13 @@
             L.geoJSON(data, {
                 pointToLayer: function (feature, latlng) {
                     return L.circleMarker(latlng, geojsonMarkerOptions);
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties && feature.properties.code) {
+                        // TODO edit here for an improved popup
+                        var popupContent = "<p>"+feature.properties.code+"</p>";
+                        layer.bindPopup(popupContent);
+                    }
                 }
             }).addTo(mymap);
         });
