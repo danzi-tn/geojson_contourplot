@@ -6,7 +6,7 @@ An example of geojson displayed as contour plot
 
 ### The background is using GeoJSON with Leaflet
 
-Use L.geoJSON(geojsondata) as explaind in  [Leaflet documentation](https://github.com/Leaflet/Leaflet/blob/master/docs/examples/geojson/index.md)
+Use L.geoJSON(geojsondata) as explained in  [Leaflet documentation](https://github.com/Leaflet/Leaflet/blob/master/docs/examples/geojson/index.md)
 
 For example:
 
