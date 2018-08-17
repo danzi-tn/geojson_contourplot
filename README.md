@@ -2,7 +2,7 @@
 
 An example of geojson displayed as contour plot
 
-(images/screenshot.png)
+[Screenshot](images/screenshot.png)
 
 ### The background is using GeoJSON with Leaflet
 
